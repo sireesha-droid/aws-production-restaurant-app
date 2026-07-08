@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block title %}Admin Dashboard - Spice Route{% endblock %}
+{% block content %}
+<h2>Admin Dashboard</h2>
+<a href="{{ url_for('admin_menu') }}" class="btn btn-secondary mb-3">Manage Menu</a>
+<table class="table">
+    <thead>
+        <tr><th>Order ID</th><th>Customer</th><th>Status</th><th>Placed At</th><th>Update</th></tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.username }}</td>
+            <td>{{ order.status }}</td>
+            <td>{{ order.created_at }}</td>
+            <td>
+                <form method="POST" action="{{ url_for('update_order_status', order_id=order.id) }}" class="d-flex gap-2">
+                    <select name="status" class="form-select form-select-sm">
+                        <option value="pending">pending</option>
+                        <option value="preparing">preparing</option>
+                        <option value="ready">ready</option>
+                        <option value="delivered">delivered</option>
+                    </select>
+                    <button type="submit" class="btn btn-sm btn-primary">Update</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
