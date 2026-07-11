@@ -10,9 +10,9 @@ app.secret_key = os.environ.get("SECRET_KEY", "dev-secret-change-me")
 # --- Database connection settings (read from environment variables) ---
 # In production (EC2/RDS) these come from environment variables set in
 # the Docker container or ECS/EC2 task definition. Locally, defaults are used.
-DB_HOST = os.environ.get("DB_HOST", "localhost")
-DB_USER = os.environ.get("DB_USER", "root")
-DB_PASSWORD = os.environ.get("DB_PASSWORD", "")
+DB_HOST = os.environ.get("DB_HOST", "restaurant-db.cry2eu46qsyp.ap-southeast-2.rds.amazonaws.com")
+DB_USER = os.environ.get("DB_USER", "admin")
+DB_PASSWORD = os.environ.get("DB_PASSWORD", "Sireeshamanku")
 DB_NAME = os.environ.get("DB_NAME", "restaurant_db")
 
 
