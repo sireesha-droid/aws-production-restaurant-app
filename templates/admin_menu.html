@@ -1,40 +1,235 @@
 {% extends "base.html" %}
-{% block title %}Manage Menu - Spice Route{% endblock %}
-{% block content %}
-<h2>Manage Menu</h2>
+{% block title %}Admin Menu - Spice Route{% endblock %}
 
-<form method="POST" class="row g-2 mb-4">
-    <div class="col-md-4">
-        <input type="text" name="name" class="form-control" placeholder="Item name" required>
-    </div>
-    <div class="col-md-3">
-        <input type="text" name="category" class="form-control" placeholder="Category" required>
-    </div>
-    <div class="col-md-2">
-        <input type="number" step="0.01" name="price" class="form-control" placeholder="Price" required>
-    </div>
-    <div class="col-md-2">
-        <button type="submit" class="btn btn-success w-100">Add Item</button>
-    </div>
+{% block content %}
+
+<style>
+
+.admin-banner{
+background:linear-gradient(90deg,#d62828,#ff6b00);
+color:white;
+padding:35px;
+border-radius:20px;
+margin-bottom:40px;
+text-align:center;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+}
+
+.form-card{
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+margin-bottom:40px;
+}
+
+.table-card{
+background:white;
+padding:25px;
+border-radius:20px;
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+
+.form-control{
+border-radius:12px;
+padding:12px;
+}
+
+.btn-add{
+background:#28a745;
+color:white;
+border:none;
+padding:12px;
+border-radius:12px;
+font-weight:bold;
+}
+
+.btn-add:hover{
+background:#218838;
+color:white;
+}
+
+.table th{
+background:#d62828;
+color:white;
+}
+
+.table td{
+vertical-align:middle;
+}
+
+.badge-category{
+background:#0d6efd;
+padding:8px 12px;
+border-radius:20px;
+font-size:13px;
+color:white;
+}
+
+.price{
+font-weight:bold;
+color:#d62828;
+}
+
+</style>
+
+<div class="admin-banner">
+
+<h1>🍽️ Restaurant Menu Management</h1>
+
+<p>Add, Update and Delete Food Items</p>
+
+</div>
+
+<div class="form-card">
+
+<h3 class="mb-4">
+
+➕ Add New Food Item
+
+</h3>
+
+<form method="POST">
+
+<div class="row g-3">
+
+<div class="col-md-4">
+
+<input
+type="text"
+name="name"
+class="form-control"
+placeholder="Food Name"
+required>
+
+</div>
+
+<div class="col-md-3">
+
+<input
+type="text"
+name="category"
+class="form-control"
+placeholder="Category"
+required>
+
+</div>
+
+<div class="col-md-3">
+
+<input
+type="number"
+step="0.01"
+name="price"
+class="form-control"
+placeholder="Price"
+required>
+
+</div>
+
+<div class="col-md-2">
+
+<button class="btn-add w-100">
+
+➕ Add
+
+</button>
+
+</div>
+
+</div>
+
 </form>
 
-<table class="table">
-    <thead>
-        <tr><th>Name</th><th>Category</th><th>Price</th><th></th></tr>
-    </thead>
-    <tbody>
-        {% for item in items %}
-        <tr>
-            <td>{{ item.name }}</td>
-            <td>{{ item.category }}</td>
-            <td>₹{{ item.price }}</td>
-            <td>
-                <form method="POST" action="{{ url_for('delete_menu_item', item_id=item.id) }}">
-                    <button type="submit" class="btn btn-sm btn-danger">Delete</button>
-                </form>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
+</div>
+
+<div class="table-card">
+
+<h3 class="mb-4">
+
+📋 Current Menu
+
+</h3>
+
+<table class="table table-hover align-middle">
+
+<thead>
+
+<tr>
+
+<th>#</th>
+
+<th>Food Item</th>
+
+<th>Category</th>
+
+<th>Price</th>
+
+<th>Action</th>
+
+</tr>
+
+</thead>
+
+<tbody>
+
+{% for item in items %}
+
+<tr>
+
+<td>
+
+{{ loop.index }}
+
+</td>
+
+<td>
+
+🍽️ {{ item.name }}
+
+</td>
+
+<td>
+
+<span class="badge-category">
+
+{{ item.category }}
+
+</span>
+
+</td>
+
+<td class="price">
+
+₹{{ item.price }}
+
+</td>
+
+<td>
+
+<form
+method="POST"
+action="{{ url_for('delete_menu_item', item_id=item.id) }}">
+
+<button
+class="btn btn-danger btn-sm">
+
+🗑 Delete
+
+</button>
+
+</form>
+
+</td>
+
+</tr>
+
+{% endfor %}
+
+</tbody>
+
 </table>
+
+</div>
+
 {% endblock %}
