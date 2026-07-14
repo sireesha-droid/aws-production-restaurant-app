@@ -5,57 +5,118 @@
 {% block content %}
 
 <style>
+
 .hero{
-    background:url("https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1600&q=80");
-    background-size:cover;
-    background-position:center;
-    height:80vh;
-    border-radius:20px;
-    position:relative;
-    overflow:hidden;
+background:url("https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1600&q=80");
+background-size:cover;
+background-position:center;
+height:85vh;
+border-radius:20px;
+position:relative;
+overflow:hidden;
+margin-bottom:50px;
 }
 
 .overlay{
-    position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    background:rgba(0,0,0,0.55);
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background:rgba(0,0,0,.60);
 }
 
 .hero-content{
-    position:relative;
-    z-index:2;
-    color:white;
-    text-align:center;
-    padding-top:170px;
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+color:white;
+text-align:center;
+width:90%;
+z-index:2;
 }
 
 .hero h1{
-    font-size:60px;
-    font-weight:bold;
+font-size:65px;
+font-weight:bold;
 }
 
 .hero p{
-    font-size:24px;
-    margin-top:20px;
+font-size:24px;
+margin-top:20px;
 }
 
-.btn-order{
-    background:#ff6b00;
-    color:white;
-    padding:15px 35px;
-    border-radius:50px;
-    text-decoration:none;
-    font-size:22px;
-    transition:.3s;
+.btn-main{
+background:#ff6b00;
+padding:15px 35px;
+color:white;
+border-radius:50px;
+text-decoration:none;
+font-size:20px;
+margin:10px;
+display:inline-block;
+transition:.3s;
 }
 
-.btn-order:hover{
-    background:#ff4500;
-    color:white;
+.btn-main:hover{
+background:#ff4500;
+color:white;
+transform:scale(1.05);
 }
+
+.stats{
+margin-top:-40px;
+margin-bottom:60px;
+}
+
+.stat-card{
+background:white;
+border-radius:20px;
+padding:25px;
+text-align:center;
+box-shadow:0 8px 25px rgba(0,0,0,.15);
+transition:.3s;
+}
+
+.stat-card:hover{
+transform:translateY(-8px);
+}
+
+.feature-card{
+border:none;
+border-radius:20px;
+overflow:hidden;
+box-shadow:0 8px 25px rgba(0,0,0,.15);
+transition:.3s;
+}
+
+.feature-card:hover{
+transform:translateY(-10px);
+}
+
+.feature-card img{
+height:220px;
+object-fit:cover;
+}
+
+.offer{
+background:linear-gradient(90deg,#d62828,#ff6b00);
+color:white;
+padding:40px;
+border-radius:20px;
+text-align:center;
+margin-top:60px;
+}
+
+.why{
+background:#fff;
+padding:50px;
+border-radius:20px;
+margin-top:60px;
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+
 </style>
 
 <div class="hero">
@@ -64,15 +125,221 @@
 
 <div class="hero-content">
 
-<h1>🍽 Welcome to Spice Route</h1>
+<h1>🍽️ Welcome to Spice Route</h1>
 
-<p>Delicious food made with love and delivered fresh to your doorstep.</p>
+<p>
+Experience authentic Indian flavors made with fresh ingredients.
+</p>
 
-<br>
-
-<a href="{{ url_for('menu') }}" class="btn-order">
-Explore Our Menu
+<a href="{{ url_for('menu') }}" class="btn-main">
+🍴 Explore Menu
 </a>
+
+<a href="{{ url_for('register') }}" class="btn-main">
+🛒 Order Now
+</a>
+
+</div>
+
+</div>
+
+<div class="container stats">
+
+<div class="row">
+
+<div class="col-md-3 mb-3">
+
+<div class="stat-card">
+
+<h2>100+</h2>
+
+<p>Food Items</p>
+
+</div>
+
+</div>
+
+<div class="col-md-3 mb-3">
+
+<div class="stat-card">
+
+<h2>10K+</h2>
+
+<p>Happy Customers</p>
+
+</div>
+
+</div>
+
+<div class="col-md-3 mb-3">
+
+<div class="stat-card">
+
+<h2>4.9 ⭐</h2>
+
+<p>Customer Rating</p>
+
+</div>
+
+</div>
+
+<div class="col-md-3 mb-3">
+
+<div class="stat-card">
+
+<h2>30 min</h2>
+
+<p>Fast Delivery</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<h2 class="text-center mb-4">
+🔥 Featured Dishes
+</h2>
+
+<div class="row">
+
+<div class="col-md-4 mb-4">
+
+<div class="card feature-card">
+
+<img src="https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=700">
+
+<div class="card-body">
+
+<h4>Veg Biryani</h4>
+
+<p>
+Traditional Hyderabadi biryani with aromatic spices.
+</p>
+
+<p class="text-danger fw-bold">
+₹299
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4 mb-4">
+
+<div class="card feature-card">
+
+<img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=700">
+
+<div class="card-body">
+
+<h4>Margherita Pizza</h4>
+
+<p>
+Cheesy pizza topped with fresh mozzarella.
+</p>
+
+<p class="text-danger fw-bold">
+₹399
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="col-md-4 mb-4">
+
+<div class="card feature-card">
+
+<img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=700">
+
+<div class="card-body">
+
+<h4>Cheese Burger</h4>
+
+<p>
+Juicy grilled burger with cheddar cheese.
+</p>
+
+<p class="text-danger fw-bold">
+₹249
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="offer">
+
+<h2>
+🎉 Flat 30% OFF
+</h2>
+
+<h4>
+
+Use Coupon
+
+<b>SPICE30</b>
+
+</h4>
+
+<p>
+
+Free delivery on orders above ₹499
+
+</p>
+
+</div>
+
+<div class="why">
+
+<h2 class="text-center">
+
+Why Choose Spice Route?
+
+</h2>
+
+<div class="row text-center mt-5">
+
+<div class="col-md-4">
+
+<h1>🍴</h1>
+
+<h4>Fresh Ingredients</h4>
+
+<p>We prepare every meal using fresh and premium-quality ingredients.</p>
+
+</div>
+
+<div class="col-md-4">
+
+<h1>🚚</h1>
+
+<h4>Fast Delivery</h4>
+
+<p>Your order reaches your doorstep hot and fresh within 30 minutes.</p>
+
+</div>
+
+<div class="col-md-4">
+
+<h1>⭐</h1>
+
+<h4>Best Quality</h4>
+
+<p>Trusted by thousands of happy customers across the city.</p>
+
+</div>
 
 </div>
 
