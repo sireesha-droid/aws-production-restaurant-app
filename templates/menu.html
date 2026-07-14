@@ -1,23 +1,166 @@
 {% extends "base.html" %}
 {% block title %}Menu - Spice Route{% endblock %}
+
 {% block content %}
-<h2>Our Menu</h2>
-<div class="row">
-    {% for item in items %}
-    <div class="col-md-4 mb-4">
-        <div class="card h-100">
-            <div class="card-body">
-                <h5 class="card-title">{{ item.name }}</h5>
-                <h6 class="card-subtitle mb-2 text-muted">{{ item.category }}</h6>
-                <p class="card-text">₹{{ item.price }}</p>
-                <form method="POST" action="{{ url_for('add_to_cart', item_id=item.id) }}">
-                    <button type="submit" class="btn btn-outline-primary btn-sm">Add to Cart</button>
-                </form>
-            </div>
-        </div>
-    </div>
-    {% else %}
-    <p>No menu items yet. Check back soon!</p>
-    {% endfor %}
+
+<style>
+
+.hero{
+background:url("https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1600&q=80");
+background-size:cover;
+background-position:center;
+height:280px;
+border-radius:20px;
+position:relative;
+margin-bottom:40px;
+}
+
+.hero::before{
+content:'';
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background:rgba(0,0,0,.55);
+border-radius:20px;
+}
+
+.hero-text{
+position:absolute;
+width:100%;
+top:50%;
+transform:translateY(-50%);
+text-align:center;
+color:white;
+z-index:2;
+}
+
+.food-card{
+border:none;
+border-radius:18px;
+overflow:hidden;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+transition:.3s;
+}
+
+.food-card:hover{
+transform:translateY(-10px);
+}
+
+.food-card img{
+height:220px;
+object-fit:cover;
+}
+
+.price{
+font-size:22px;
+font-weight:bold;
+color:#d62828;
+}
+
+.rating{
+color:#ffb703;
+font-weight:bold;
+}
+
+.badge-hot{
+background:#ff5722;
+color:white;
+padding:6px 12px;
+border-radius:20px;
+font-size:12px;
+}
+
+</style>
+
+<div class="hero">
+
+<div class="hero-text">
+
+<h1>🍴 Our Delicious Menu</h1>
+
+<p>Fresh • Healthy • Tasty</p>
+
 </div>
+
+</div>
+
+<div class="row">
+
+{% for item in items %}
+
+<div class="col-lg-4 col-md-6 mb-4">
+
+<div class="card food-card">
+
+{% if "biryani" in item.name.lower() %}
+<img src="https://images.unsplash.com/photo-1589302168068-964664d93dc0?w=700">
+
+{% elif "pizza" in item.name.lower() %}
+<img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=700">
+
+{% elif "burger" in item.name.lower() %}
+<img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=700">
+
+{% elif "pasta" in item.name.lower() %}
+<img src="https://images.unsplash.com/photo-1621996346565-e3dbc646d9a9?w=700">
+
+{% elif "paneer" in item.name.lower() %}
+<img src="https://images.unsplash.com/photo-1631452180519-c014fe946bc7?w=700">
+
+{% elif "fried rice" in item.name.lower() %}
+<img src="https://images.unsplash.com/photo-1603133872878-684f208fb84b?w=700">
+
+{% elif "noodles" in item.name.lower() %}
+<img src="https://images.unsplash.com/photo-1617622141675-d3005b9067c5?w=700">
+
+{% elif "dosa" in item.name.lower() %}
+<img src="https://images.unsplash.com/photo-1668236543090-82eba5ee5976?w=700">
+
+{% elif "coffee" in item.name.lower() %}
+<img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=700">
+
+{% elif "cake" in item.name.lower() %}
+<img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?w=700">
+
+{% elif "ice cream" in item.name.lower() %}
+<img src="https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=700">
+
+{% else %}
+<img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=700">
+{% endif %}
+
+<div class="card-body">
+
+<span class="badge-hot">🔥 Best Seller</span>
+
+<h4 class="mt-3">{{ item.name }}</h4>
+
+<p class="text-muted">{{ item.category }}</p>
+
+<p class="rating">⭐⭐⭐⭐⭐ 4.8</p>
+
+<p class="price">₹{{ item.price }}</p>
+
+<form method="POST" action="{{ url_for('add_to_cart', item_id=item.id) }}">
+
+<button class="btn btn-danger w-100">
+
+🛒 Add To Cart
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
 {% endblock %}
