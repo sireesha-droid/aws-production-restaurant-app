@@ -1,16 +1,144 @@
 {% extends "base.html" %}
 {% block title %}Register - Spice Route{% endblock %}
+
 {% block content %}
-<h2>Register</h2>
-<form method="POST" class="col-md-4">
-    <div class="mb-3">
-        <label class="form-label">Username</label>
-        <input type="text" name="username" class="form-control" required>
-    </div>
-    <div class="mb-3">
-        <label class="form-label">Password</label>
-        <input type="password" name="password" class="form-control" required>
-    </div>
-    <button type="submit" class="btn btn-primary">Register</button>
+
+<style>
+
+.register-bg{
+background:url("https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1600&q=80");
+background-size:cover;
+background-position:center;
+height:88vh;
+border-radius:20px;
+position:relative;
+overflow:hidden;
+}
+
+.register-overlay{
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background:rgba(0,0,0,.60);
+}
+
+.register-card{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+width:430px;
+background:rgba(255,255,255,.15);
+backdrop-filter:blur(15px);
+padding:40px;
+border-radius:20px;
+color:white;
+box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+
+.register-card h2{
+text-align:center;
+margin-bottom:30px;
+font-weight:bold;
+}
+
+.form-control{
+padding:12px;
+border-radius:12px;
+}
+
+.btn-register{
+width:100%;
+background:#ff6b00;
+color:white;
+border:none;
+padding:12px;
+border-radius:30px;
+font-size:18px;
+transition:.3s;
+}
+
+.btn-register:hover{
+background:#e65100;
+}
+
+.footer-link{
+text-align:center;
+margin-top:20px;
+}
+
+.footer-link a{
+color:#ffd166;
+font-weight:bold;
+text-decoration:none;
+}
+
+.footer-link a:hover{
+text-decoration:underline;
+}
+
+</style>
+
+<div class="register-bg">
+
+<div class="register-overlay"></div>
+
+<div class="register-card">
+
+<h2>🍽 Join Spice Route</h2>
+
+<form method="POST">
+
+<div class="mb-3">
+
+<label class="form-label">👤 Username</label>
+
+<input
+type="text"
+name="username"
+class="form-control"
+placeholder="Choose Username"
+required>
+
+</div>
+
+<div class="mb-3">
+
+<label class="form-label">🔒 Password</label>
+
+<input
+type="password"
+name="password"
+class="form-control"
+placeholder="Create Password"
+required>
+
+</div>
+
+<button class="btn-register">
+
+Create Account
+
+</button>
+
 </form>
+
+<div class="footer-link">
+
+Already have an account?
+
+<a href="{{ url_for('login') }}">
+
+Login Here
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
 {% endblock %}
