@@ -1,27 +1,285 @@
 {% extends "base.html" %}
-{% block title %}Cart - Spice Route{% endblock %}
+{% block title %}Your Cart - Spice Route{% endblock %}
+
 {% block content %}
-<h2>Your Cart</h2>
+
+<style>
+
+.cart-banner{
+background:url("https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1600&q=80");
+background-size:cover;
+background-position:center;
+height:220px;
+border-radius:20px;
+position:relative;
+margin-bottom:40px;
+overflow:hidden;
+}
+
+.cart-banner::before{
+content:"";
+position:absolute;
+top:0;
+left:0;
+right:0;
+bottom:0;
+background:rgba(0,0,0,.60);
+}
+
+.banner-text{
+position:absolute;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+color:white;
+text-align:center;
+z-index:2;
+}
+
+.cart-card{
+background:white;
+border-radius:20px;
+box-shadow:0 10px 25px rgba(0,0,0,.15);
+padding:20px;
+margin-bottom:20px;
+}
+
+.food-img{
+width:120px;
+height:120px;
+object-fit:cover;
+border-radius:15px;
+}
+
+.price{
+font-size:20px;
+font-weight:bold;
+color:#d62828;
+}
+
+.summary{
+background:#fff8f2;
+padding:25px;
+border-radius:20px;
+box-shadow:0 8px 20px rgba(0,0,0,.12);
+}
+
+.total{
+font-size:30px;
+font-weight:bold;
+color:#d62828;
+}
+
+.place-btn{
+width:100%;
+background:#ff6b00;
+color:white;
+font-size:20px;
+padding:12px;
+border:none;
+border-radius:40px;
+transition:.3s;
+}
+
+.place-btn:hover{
+background:#e65100;
+}
+
+.empty-cart{
+text-align:center;
+padding:60px;
+}
+
+</style>
+
+<div class="cart-banner">
+
+<div class="banner-text">
+
+<h1>🛒 Your Shopping Cart</h1>
+
+<p>Fresh Food • Fast Delivery • Best Taste</p>
+
+</div>
+
+</div>
+
 {% if items %}
-<table class="table">
-    <thead>
-        <tr><th>Item</th><th>Qty</th><th>Subtotal</th></tr>
-    </thead>
-    <tbody>
-        {% for item in items %}
-        <tr>
-            <td>{{ item.name }}</td>
-            <td>{{ item.qty }}</td>
-            <td>₹{{ item.subtotal }}</td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-<h4>Total: ₹{{ total }}</h4>
-<form method="POST" action="{{ url_for('place_order') }}">
-    <button type="submit" class="btn btn-success">Place Order</button>
+
+<div class="row">
+
+<div class="col-lg-8">
+
+{% for item in items %}
+
+<div class="cart-card">
+
+<div class="row align-items-center">
+
+<div class="col-md-3">
+
+<img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=500"
+class="food-img">
+
+</div>
+
+<div class="col-md-5">
+
+<h4>{{ item.name }}</h4>
+
+<p>
+
+Freshly prepared by our expert chefs.
+
+</p>
+
+<p>
+
+⭐⭐⭐⭐⭐ (4.8)
+
+</p>
+
+</div>
+
+<div class="col-md-2">
+
+<h5>
+
+Qty
+
+</h5>
+
+<h4>
+
+{{ item.qty }}
+
+</h4>
+
+</div>
+
+<div class="col-md-2">
+
+<p class="price">
+
+₹{{ item.subtotal }}
+
+</p>
+
+</div>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<div class="col-lg-4">
+
+<div class="summary">
+
+<h3>
+
+Order Summary
+
+</h3>
+
+<hr>
+
+<p>
+
+Subtotal
+
+<span class="float-end">
+
+₹{{ total }}
+
+</span>
+
+</p>
+
+<p>
+
+Delivery
+
+<span class="float-end text-success">
+
+FREE
+
+</span>
+
+</p>
+
+<p>
+
+GST
+
+<span class="float-end">
+
+Included
+
+</span>
+
+</p>
+
+<hr>
+
+<p class="total">
+
+₹{{ total }}
+
+</p>
+
+<form method="POST"
+action="{{ url_for('place_order') }}">
+
+<button class="place-btn">
+
+🍽 Place Order
+
+</button>
+
 </form>
+
+</div>
+
+</div>
+
+</div>
+
 {% else %}
-<p>Your cart is empty. <a href="{{ url_for('menu') }}">Browse the menu</a>.</p>
+
+<div class="empty-cart">
+
+<h1>
+
+🛒
+
+</h1>
+
+<h2>
+
+Your Cart is Empty
+
+</h2>
+
+<p>
+
+Looks like you haven't added any delicious food yet.
+
+</p>
+
+<a
+href="{{ url_for('menu') }}"
+class="btn btn-warning btn-lg">
+
+🍴 Browse Menu
+
+</a>
+
+</div>
+
 {% endif %}
+
 {% endblock %}
