@@ -8,19 +8,15 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy via Bastion
-        uses: appleboy/ssh-action@v1.0.3
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
         with:
-          host: ${{ secrets.APP_SERVER_HOST }}
-          username: ${{ secrets.APP_SERVER_USER }}
-          key: ${{ secrets.APP_SERVER_SSH_KEY }}
-          proxy_host: ${{ secrets.BASTION_HOST }}
-          proxy_username: ${{ secrets.BASTION_USER }}
-          proxy_key: ${{ secrets.BASTION_SSH_KEY }}
-          script: |
-            cd ~/aws-production-restaurant-app
-            git pull origin main
-            docker build -t restaurant-app:latest .
-            docker stop restaurant-app || true
-            docker rm restaurant-app || true
-            docker run -d --name restaurant-app -p 5000:5000 restaurant-app:latest
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-southeast-2
+
+      - name: Trigger Instance Refresh
+        run: |
+          aws autoscaling start-instance-refresh \
+            --auto-scaling-group-name restaurant-asg \
+            --preferences '{"MinHealthyPercentage": 90, "InstanceWarmup": 300}'
