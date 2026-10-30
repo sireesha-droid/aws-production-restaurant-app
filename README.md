@@ -72,6 +72,5 @@ private subnets, behind an Application Load Balancer, with:
 - **`/health`** used by the Target Group for health checks
 - **GitHub Actions** building and pushing the Docker image, then deploying
 - **CloudWatch + SNS** for monitoring and alerts
-- **Terraform** provisioning all of the above
 
 See the main project README for the full AWS architecture and deployment steps.
